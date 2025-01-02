@@ -7,11 +7,11 @@ import os
 with open('test_annotations.json', 'r') as file:
     train_annotations = json.load(file)
 
-"""with open('annotations.json', 'r') as file:
-    annotations = json.load(file)"""
+with open('annotations.json', 'r') as file:
+    annotations = json.load(file)
 
 # Extract all the IDs from the annotations
-"""annotation_ids = list(set([annotation['image_id'] for annotation in train_annotations['annotations']]))
+# annotation_ids = list(set([annotation['image_id'] for annotation in train_annotations['annotations']]))
 n = 0
 for image in annotations['images']:
     n += 1
@@ -21,9 +21,4 @@ for image in annotations['images']:
         print("created a new path")
         os.mkdir(os.path.split(path)[0])
     print(n)
-    urllib.request.urlretrieve(image['flickr_url'], path)"""
-for k, annotation in enumerate(train_annotations['annotations']):
-    train_annotations['annotations'][k] = {'id': annotation['id'], 'image_id': annotation['image_id'], 'category_id': annotation['category_id'], 'segmentation': annotation['segmentation'], 'area': annotation['area'], 'bbox': annotation['bbox'], 'iscrowd': annotation['iscrowd']}
-
-with open('test_annotations.json', 'w') as file:
-    json.dump(train_annotations, file, indent=4)
+    urllib.request.urlretrieve(image['flickr_url'], path)
