@@ -9,7 +9,6 @@ from mrcnn import model as modellib, utils
 from PIL import Image, ImageDraw
 
 
-
 class CocoLikeDataset(utils.Dataset):
     def load_data(self, annotation_json, images_dir):
         with open(annotation_json, 'r') as json_file:
@@ -57,8 +56,8 @@ class CocoLikeDataset(utils.Dataset):
             mask = Image.new('1', (image_info['width'], image_info['height']))
             mask_draw = ImageDraw.ImageDraw(mask, '1')
             for segmentation in annotation['segmentation']:
-                mask_draw.polygon(segmentation, fill=1) #for each object in photo draw a polygon for it
-                bool_array = np.array(mask) > 0 # make a np array
+                mask_draw.polygon(segmentation, fill=1)  #for each object in photo draw a polygon for it
+                bool_array = np.array(mask) > 0  # make a np array
                 instance_masks.append(bool_array)
                 class_ids.append(class_id)
         if instance_masks:
@@ -83,6 +82,7 @@ class TrashConfig(Config):
     NAME = "test_config"
     NUM_CLASSES = 61
     STEPS_PER_EPOCH = 100
+    IMAGES_PER_GPU = 3
 
 
 config = TrashConfig()
